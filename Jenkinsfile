@@ -1,8 +1,8 @@
 pipeline {
     agent any
     stages {
-        repositoryCommiterEmail = 'ci@example.com'
-        repositoryCommiterUsername = 'examle.com'
+        repositoryCommiterEmail = "ci@example.com"
+        repositoryCommiterUsername = "examle.com"
 
         checkout scm
 
