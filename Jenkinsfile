@@ -20,10 +20,9 @@ pipeline {
               sh 'git config --global user.name raymond'
               sh 'git tag -a v1.0.0-rc.$BUILD_NUMBER -m "adding tag"'
               sshagent(['d0e645ce-ffa4-4fa1-95c3-a578c3f1eaf8']) {
-                  sh("git push --tags")
+                 sh 'git push origin --tags' 
               }
             }
-              sh 'git push origin --tags'
        } 
     }
 }
