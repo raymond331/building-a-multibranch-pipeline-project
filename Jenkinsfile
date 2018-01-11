@@ -24,7 +24,6 @@ pipeline {
               }
             }
               sh 'git push origin --tags'
-          }
-        }
+       } 
     }
 }
