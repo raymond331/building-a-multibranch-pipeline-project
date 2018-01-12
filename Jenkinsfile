@@ -52,7 +52,7 @@ pipeline {
             }
             steps {
                 sh 'gradle clean -Penv=prod war'
-                sh 'mv ./build/libs/lead-app.war ./build/libs/led-app-"${env.release_version}-${env.BUILD_NUMBER}".war'
+                sh 'mv ./build/libs/lead-app.war ./build/libs/led-app-$release_version.war'
             }
         }
 
