@@ -57,7 +57,7 @@ pipeline {
         }
 
 
-        stage('Publish Artifacts') {
+        stage('Publish Develop Artifacts') {
             when {
                 branch 'develop'
             }
@@ -66,7 +66,7 @@ pipeline {
             }
         }
 
-        stage('Publish Artifacts') {
+        stage('Publish Publish Artifacts') {
             when {
                 branch 'release/1.0.0'
             }
