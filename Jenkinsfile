@@ -1,11 +1,12 @@
 pipeline {
+   environment {
+      develop_version = "v1.0.0-dev."
+      release_version = "v1.0.0-rc."
+   }
     agent any
     stages {
 
         stage('Tag branch') {
-
-            env.develop_version = 'v1.0.0-dev.'
-            env.release_version = 'v1.0.0-rc.'
 
             when {
                 branch 'develop'
