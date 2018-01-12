@@ -6,7 +6,7 @@ pipeline {
     agent any
     stages {
 
-        stage('Tag branch') {
+        stage('Tag develop branch') {
 
             when {
                 branch 'develop'
@@ -18,6 +18,8 @@ pipeline {
                    sh 'git push origin --tags'
             }
         }
+     
+         stage('Tag release branch') {
             when {
                 branch 'release/1.0.0'
             }
@@ -30,8 +32,10 @@ pipeline {
                    sh 'git push origin --tags'
                 }
             }
+         }
 
-        stage('Package') {
+
+        stage('Package develop') {
             when {
                 branch 'develop'
             }
@@ -39,6 +43,9 @@ pipeline {
                 sh 'gradle clean -Penv=dev war'
                 sh 'mv ./build/libs/led-app.war ./build/libs/led-app-"${env.develop_version}-${env.BUILD_NUMBER}".war'
             }
+        }
+
+        stage('Package release') {
             when {
                 branch 'release/1.0.0'
             }
@@ -46,14 +53,19 @@ pipeline {
                 sh 'gradle clean -Penv=prod war'
                 sh 'mv ./build/libs/lead-app.war ./build/libs/led-app-"${env.release_version}-${env.BUILD_NUMBER}".war'
             }
+        }
 
-        stage('Publish Artifacts')
+
+        stage('Publish Artifacts') {
             when {
                 branch 'develop'
             }
             steps {
                 sh 'echo "upload artifacts to Nexus..."'
             }
+        }
+
+        stage('Publish Artifacts') {
             when {
                 branch 'release/1.0.0'
             }
