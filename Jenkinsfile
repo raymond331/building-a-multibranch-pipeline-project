@@ -3,6 +3,7 @@ pipeline {
       develop_version = "v1.0.0-dev."
       release_version = "v1.0.0-rc."
    }
+
     agent any
     stages {
 
@@ -18,7 +19,7 @@ pipeline {
                    sh 'git push origin --tags'
             }
         }
-     
+      }
          stage('Tag release branch') {
             when {
                 branch 'release/1.0.0'
@@ -74,6 +75,4 @@ pipeline {
             }
         }
     }
-  }
 }
-
