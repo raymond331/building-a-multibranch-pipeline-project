@@ -2,6 +2,9 @@ pipeline {
    environment {
       develop_version = "v1.0.0-dev.$BUILD_NUMBER"
       release_version = "v1.0.0-rc.$BUILD_NUMBER"
+      GIT_URL = "git@github.com:raymond331/building-a-multibranch-pipeline-project.git"
+      GIT_USER = "raymond"
+      GIT_EMAIL = "raymond.li331@outlook.com"
    }
 
     agent any
@@ -14,7 +17,7 @@ pipeline {
             }
             steps {
                 sh 'git tag -a $develop_version -m "adding tag"'
-                sh 'git remote set-url origin git@github.com:raymond331/building-a-multibranch-pipeline-project.git'
+                sh 'git remote set-url origin $GIT_URL'
                 sshagent(['d0e645ce-ffa4-4fa1-95c3-a578c3f1eaf8']) {
                    sh 'git push origin --tags'
             }
@@ -25,10 +28,10 @@ pipeline {
                 branch 'release/1.0.0'
             }
             steps {
-                sh 'git config --global user.email raymond@outlook.com'
-                sh 'git config --global user.name raymond'
+                sh 'git config --global user.email $GIT_EMAIL'
+                sh 'git config --global user.name $GIT_USER'
                 sh 'git tag -a $release_version -m "adding tag"'
-                sh 'git remote set-url origin git@github.com:raymond331/building-a-multibranch-pipeline-project.git'
+                sh 'git remote set-url origin $GIT_URL'
                 sshagent(['d0e645ce-ffa4-4fa1-95c3-a578c3f1eaf8']) {
                    sh 'git push origin --tags'
                 }
